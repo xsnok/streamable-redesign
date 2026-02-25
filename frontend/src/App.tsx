@@ -1,10 +1,10 @@
 import './App.css'
-import hulyLaserRemix from './assets/huly_laser_remix.webm'
 import blueDonut from './assets/blue_donut_remix.webm'
 import streamableScreenshot from './assets/streamable_main_screenshot.png'
 import featureBrb from './assets/features/streamable_brb.png'
 import featureIngests from './assets/features/streamable_ingests.png'
 import featureObs from './assets/features/streamable_obs.png'
+import ycLogo from './assets/Y_Combinator_logo.png'
 import { useEffect, useRef, useState } from 'react'
 
 function App() {
@@ -62,15 +62,12 @@ function App() {
       <main className="main-content">
         <section className="hero">
           <div className="badge">
-            <span className="sparkle">✦</span> Now with Smart OBS Integration
+            <img src={ycLogo} alt="Y Combinator" className="yc-logo" />
+            <span>backed by y combinator</span>
           </div>
           <h1 className="hero-title">
             Never IRL stream with<br />issues ever again.
           </h1>
-          <p className="hero-subtitle">
-            +100,000 TOTAL HOURS STREAMED! <br />
-            Automate your connections, engage viewers 24/7, and watch your channel grow — powered by cutting-edge tech.
-          </p>
           <div className="hero-actions">
             <button className="secondary-btn">Get Started ↗</button>
             <button className="primary-btn">See It in Action ↗</button>
