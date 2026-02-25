@@ -1,5 +1,6 @@
 import './App.css'
 import hulyLaserRemix from './assets/huly_laser_remix.webm'
+import blueDonut from './assets/blue_donut_remix.webm'
 import streamableScreenshot from './assets/streamable_main_screenshot.png'
 import featureBrb from './assets/features/streamable_brb.png'
 import featureIngests from './assets/features/streamable_ingests.png'
@@ -10,22 +11,31 @@ function App() {
   const dashboardRef = useRef<HTMLDivElement>(null);
   const [scale, setScale] = useState(0.85);
   const [opacity, setOpacity] = useState(0.3);
+  const [isVisible, setIsVisible] = useState(true);
+  const lastScrollY = useRef(0);
 
   useEffect(() => {
     const handleScroll = () => {
+      // Logic for dashboard scaling
       if (dashboardRef.current) {
         const rect = dashboardRef.current.getBoundingClientRect();
         const windowHeight = window.innerHeight;
-        // calculate how much it's visible based on scroll depth
         const progress = Math.max(0, Math.min(1, (windowHeight - rect.top) / (windowHeight * 0.7)));
-        // Scale from 0.85 to 1
         setScale(0.85 + progress * 0.15);
-        // Opacity from 0.3 to 1
         setOpacity(0.3 + progress * 0.7);
       }
+
+      // Logic for navbar visibility (hide on scroll down, show on scroll up)
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+      lastScrollY.current = currentScrollY;
     };
-    window.addEventListener('scroll', handleScroll);
-    handleScroll(); // init on mount
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
@@ -34,12 +44,12 @@ function App() {
       <div className="hero-background-wrapper">
         <div className="video-overlay"></div>
         <video className="video-background" autoPlay loop muted playsInline>
-          <source src={hulyLaserRemix} type="video/webm" />
+          <source src={blueDonut} type="video/webm" />
         </video>
         <div className="video-bottom-fade"></div>
       </div>
 
-      <nav className="navbar">
+      <nav className={`navbar ${!isVisible ? 'hidden' : ''}`}>
         <div className="logo">STREAMABLE</div>
         <div className="nav-links">
           <a href="#">Use Cases</a>

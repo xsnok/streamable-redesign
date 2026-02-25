@@ -2,9 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
-  --text-primary: #ffffff;
-  --text-secondary: #a1a1aa;
-  --bg-dark: #000000;
+  --text-primary: #000000;
+  --text-secondary: #52525b;
+  --bg-dark: #ffffff;
   --accent: #2563eb;
 }
 
@@ -12,8 +12,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  background-color: var(--bg-dark);
-  color: var(--text-primary);
+  background-color: #ffffff;
+  color: #000000;
   overflow-x: hidden;
 }
 
@@ -60,9 +60,8 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.3;
-  /* Dimmed heavily for dark focus */
-  background: #000;
+  opacity: 0.7;
+  background: #fff;
 }
 
 /* Adds a dark vignette/overlay over the video */
@@ -72,7 +71,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle at center, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+  background: radial-gradient(circle at center, transparent 0%, rgba(255, 255, 255, 0.4) 100%);
   z-index: -1;
   pointer-events: none;
 }
@@ -83,33 +82,59 @@ body {
   left: 0;
   width: 100%;
   height: 30vh;
-  background: linear-gradient(to top, var(--bg-dark) 0%, transparent 100%);
+  background: linear-gradient(to top, #ffffff 0%, transparent 100%);
 }
 
-/* Navbar */
+/* Navbar - Liquid Glass Bar */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 24px 48px;
+  padding: 10px 24px;
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 50;
-  background: transparent;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 1100px;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(25px) saturate(200%);
+  -webkit-backdrop-filter: blur(25px) saturate(200%);
+  border-radius: 100px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow:
+    0 10px 40px -10px rgba(0, 0, 0, 0.1),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.3);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navbar.hidden {
+  transform: translateX(-50%) translateY(-120%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.navbar:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.7);
+  box-shadow:
+    0 20px 50px -12px rgba(0, 0, 0, 0.15),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.4);
+  transform: translateX(-50%) translateY(-2px);
 }
 
 .logo {
-  font-size: 1.5rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  font-family: monospace;
+  font-size: 1.125rem;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  font-family: 'Inter', sans-serif;
+  color: #000;
 }
 
 .nav-links {
   display: flex;
-  gap: 32px;
+  gap: 28px;
 }
 
 .nav-links a {
@@ -125,23 +150,23 @@ body {
 }
 
 .nav-cta {
-  background: var(--text-primary);
-  color: var(--bg-dark);
+  background: #000000;
+  color: #ffffff;
   border: none;
-  border-radius: 9999px;
-  padding: 10px 20px;
-  font-size: 0.875rem;
+  border-radius: 100px;
+  padding: 8px 18px;
+  font-size: 0.8125rem;
   font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 8px;
-  transition: transform 0.2s ease, background 0.2s ease;
+  gap: 6px;
+  transition: all 0.3s ease;
 }
 
 .nav-cta:hover {
   transform: translateY(-1px) scale(1.02);
-  background: #f4f4f5;
+  background: #27272a;
 }
 
 /* Main Content */
@@ -171,16 +196,16 @@ body {
   align-items: center;
   gap: 8px;
   font-size: 0.875rem;
-  color: var(--text-secondary);
+  color: #000000;
   margin-bottom: 24px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 6px 16px;
   border-radius: 100px;
 }
 
 .sparkle {
-  color: #60a5fa;
+  color: #2563eb;
   /* Light blue sparkle */
   font-size: 1rem;
 }
@@ -192,11 +217,12 @@ body {
   letter-spacing: -0.03em;
   margin: 0 0 24px 0;
   text-wrap: balance;
+  color: #000000;
 }
 
 .hero-subtitle {
   font-size: 1.25rem;
-  color: var(--text-secondary);
+  color: #000000;
   max-width: 650px;
   margin: 0 auto 40px auto;
   line-height: 1.6;
